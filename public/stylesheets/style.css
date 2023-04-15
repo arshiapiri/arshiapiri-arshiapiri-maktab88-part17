@@ -1,0 +1,46 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 50px auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: 'Tahoma', sans-serif;
+  white-space: nowrap;
+}
+
+thead {
+  background-color: rgb(109, 108, 107);
+  color: #fff;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #fff;
+}
+
+tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddc5e4;
+}
+
+td:before {
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+  margin-right: 10px;
+}
