@@ -1,32 +1,43 @@
-$(() => {
-    $.get("/employee/all", (data) => {
-        data.forEach(element => {
-            showEmployeeInfo(element._id);
-        });
-    });
-});
-function showEmployeeInfo(data) {
-    const table = $("<table>").addClass("table");
+$(function () {
+    let userData;
+  
+    const infoContainer = $("#infoContainer");
+  
+    const userProfileRenderer = () => {
+      infoContainer.html(`
+      <p>FirstName: ${userData.fristName}</p>
+      <p>LastName: ${userData.lastName}</p>
+      <p>Phone_Number: ${userData.phone_number}</p>
+      <p>Gender: ${userData.Gender}</p>
+      <p>Province: ${userData.Province}</p>
+      <p>RoleInCompany: ${userData.RoleInCompany}</p>
+      <p>nationalCode: ${userData.nationalCode}</p>
+      <p>DateOfRegistration: ${userData.DateOfRegistration}</p>
+      `);
+    };
+  
+    const requestHandler = () => {
+        const employeeId = location.pathname.split("/").at(3)
+      $.ajax({
+        type: "GET",
+        url: `/employee/${employeeId}`,
+        success: function (response) {
+          userData = response;
+          console.log(userData);
+            userProfileRenderer();
+        },
+        error: function (err) {
+          if (err.status === 404) {
+            infoContainer.html(`
+            <p>User not found</p>
+            `);
+          } else {
+            alert("Something went wrong.");
+          }
+        },
+      });
+    };
+  
+    requestHandler();
+  });
 
-    
-    const thead = $("<thead>");
-    const tr = $("<tr>");
-    
-    tr.append($("<th>").text("First Name"));
-    tr.append($("<th>").text("Last Name"));
-    tr.append($("<th>").text("Gender"));
-    tr.append($("<th>").text("National Code"));
-    tr.append($("<th>").text("Phone Number"));
-    tr.append($("<th>").text("Province"));
-    tr.append($("<th>").text("Role In Company"));
-    tr.append($("<th>").text("Date Of Registration"));
-    thead.append(tr);
-    table.append(thead);
-
-    // اضافه کردن ردیف‌های جدول با اطلاعات کاربر
-    const tbody = $("<tbody>")
-    table.append(tbody);
-
-    // اضافه کردن جدول به بدنه صفحه
-    $("body").append(table);
-}

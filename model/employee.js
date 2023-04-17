@@ -67,6 +67,15 @@ const EmployeeSchema = new mongoose.Schema({
         enum: ["Employee", "Manager"],
         default: "Employee"
     },
+    compani: {
+        type: mongoose.Types.ObjectId,
+        ref: "compani",
+        trim: true,
+        required: true,
+        type: String,
+        minlength: 2,
+        maxlength: 40,
+      },
     DateOfRegistration: {
         type: Date,
         default: Date.now,

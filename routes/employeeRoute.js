@@ -5,8 +5,8 @@ const { getAllEmployees, createEmployee , page, getEmployeeWithId, pageInfo} = r
 
 router.get("/all" , getAllEmployees);
 router.get("/page" , page);
-router.get("/pageInfo",pageInfo);
+router.get("/pageInfo/:id",pageInfo);
 router.post("/" , createEmployee);
-router.get("/:id", getEmployeeWithId)
+router.get("/:id", getEmployeeWithId);
 
 module.exports = router

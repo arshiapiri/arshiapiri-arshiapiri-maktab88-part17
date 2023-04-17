@@ -1,4 +1,3 @@
-
 const headers = ["fristName", "lastName", "gender", "phone_number", "province", "roleInCompany", "DateOfRegistration", "more information"];
 $(() => {
     $.get("/employee/all", (data) => {
@@ -14,12 +13,12 @@ function tableCreator(headers, data) {
     }
     $("table thead tr").append(`<th> More Info </th>`);
 
-    data.forEach(function(employee) {
+    data.forEach(function (employee) {
         const row = $("<tr></tr>");
-        
-        headers.forEach(function(header) {
+
+        headers.forEach(function (header) {
             if (header === "more information") {
-                row.append(`<td> <button class="btn btn-primary more-info-btn" data-id="${employee._id}">More Info </button>  </td>`);
+                row.append(`<td> <a href="/employee/pageInfo/${employee._id}"  class="btn btn-primary more-info-btn">More Info </a>  </td>`);
             } else {
                 row.append(`<td>${employee[header]}</td>`);
             }
@@ -27,7 +26,4 @@ function tableCreator(headers, data) {
 
         $("table tbody").append(row);
     });
-    $(".more-info-btn").click(function() {
-        window.location.href = `/employee/pageInfo`;
-    })
 }
